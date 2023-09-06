@@ -1,0 +1,18 @@
+---
+title: {{topic_name}}
+---
+
+#{{topic_name}}
+
+The following linked pages, topics, processes, and documentation below relate to {{topic_name}}.
+
+<hr />
+
+{% for tag, pages in tags %}
+
+## {{tag}}
+{%  for page in pages %}
+  * [{{page.title}}]({{page.filename}})
+{% endfor %}
+ 
+{% endfor %}
