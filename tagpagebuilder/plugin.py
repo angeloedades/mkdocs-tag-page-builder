@@ -9,7 +9,7 @@ from .helpers import get_metadata
 
 class TagPageBuilderPlugin(BasePlugin):
     config_scheme = (
-        ("topics", Type(str)),
+        ("topics", Type(list)),
         ("document_folder", Type(str, default="docs")),
         ("page_template", Type(str)),
     )
