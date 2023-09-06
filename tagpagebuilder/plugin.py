@@ -71,7 +71,7 @@ class TagPageBuilderPlugin(BasePlugin):
             environment = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(str(template_path))
             )
-            template = environment.get_template("tags.md.template")
+            template = environment.get_template("page.md.template")
         else:
             environment = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(
