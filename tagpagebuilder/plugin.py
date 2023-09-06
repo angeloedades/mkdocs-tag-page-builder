@@ -46,7 +46,7 @@ class TagPageBuilderPlugin(BasePlugin):
                 topic_name=topic_name, files=files, config=config
             )
 
-            self.generate_tags_file(topic_name=topic_files=, topic_files=files)
+            self.generate_tags_file(topic_name=topic_name, topic_files=topic_files)
 
     def get_topic_files(self, topic_name, files, config):
         info(f"Getting files under topic: {topic_name}")
