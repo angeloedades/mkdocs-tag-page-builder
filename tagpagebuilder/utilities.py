@@ -1,7 +1,3 @@
-#
-# Utilities
-#
-
 import logging
 import mkdocs
 from packaging.version import Version
