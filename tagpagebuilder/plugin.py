@@ -1,5 +1,6 @@
 import jinja2
 from pathlib import Path
+from collections import defaultdict
 from mkdocs.plugins import BasePlugin
 from mkdocs.config.config_options import Type
 from .utilities import info
@@ -65,32 +66,32 @@ class TagHierarchyPlugin(BasePlugin):
 
     def generate_topic_page(self, data, topic_name):
         info(f"Generating a topic page for: {topic_name}")
-        if self.tags_template is None:
-            templ_path = Path(__file__).parent / Path("templates")
+        if self.page_template is None:
+            template_path = Path(__file__).parent / Path("templates")
             environment = jinja2.Environment(
-                loader=jinja2.FileSystemLoader(str(templ_path))
+                loader=jinja2.FileSystemLoader(str(template_path))
             )
-            templ = environment.get_template("tags.md.template")
+            template = environment.get_template("tags.md.template")
         else:
             environment = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(
                     searchpath=str(self.tags_template.parent)
                 )
             )
-            templ = environment.get_template(str(self.tags_template.name))
-        output_text = templ.render(
+            template = environment.get_template(str(self.page_template.name))
+        output_text = template.render(
             tags=sorted(data.items(), key=lambda t: t[0].lower()),
-            platform_name=platform_name,
+            topic_name=topic_name,
         )
         return output_text
 
-    def generate_tags_file(self, platform, platform_files):
-        info("generate_tags_file()")
-        sorted_meta = sorted(
-            platform_files, key=lambda e: e.get("year", 5000) if e else 0
+    def generate_tags_file(self, topic_name, topic_files):
+        info(f"Generating a topics page file for {topic_name}")
+        sorted_topic_files = sorted(
+            topic_files, key=lambda e: e.get("year", 5000) if e else 0
         )
         tag_dict = defaultdict(list)
-        for e in sorted_meta:
+        for e in sorted_topic_files:
             if not e:
                 continue
             if "title" not in e:
@@ -100,7 +101,7 @@ class TagHierarchyPlugin(BasePlugin):
                 for tag in tags:
                     tag_dict[tag].append(e)
 
-        t = self.generate_tags_page(data=tag_dict, platform_name=platform)
+        t = self.generate_topic_page(data=tag_dict, topic_name=topic_name)
 
-        with open(f"{self.tags_folder}/{self.tags_prefix}-{platform}.md", "w") as f:
+        with open(f"{self.tags_folder}/{topic_name}.md", "w") as f:
             f.write(t)
