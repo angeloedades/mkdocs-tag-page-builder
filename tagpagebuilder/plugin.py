@@ -7,7 +7,7 @@ from .utilities import info
 from .helpers import get_metadata
 
 
-class TagHierarchyPlugin(BasePlugin):
+class TagPageBuilderPlugin(BasePlugin):
     config_scheme = (
         ("topics", Type(str)),
         ("document_folder", Type(str, default="docs")),
