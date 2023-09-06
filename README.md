@@ -5,7 +5,7 @@ This is a MkDocs plugin that builds a number of pages according to an attribute 
 ## Configuration Options
 ```
 plugins:
-  - taghierarchy:
+  - tagpagebuilder:
       topics: airplane, cats, cloud
       document_folder: docs
 ```
