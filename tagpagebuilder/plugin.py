@@ -9,7 +9,7 @@ from .helpers import get_metadata
 
 class TagPageBuilderPlugin(BasePlugin):
     config_scheme = (
-        ("topics", Type(str)),
+        ("topics", Type(list)),
         ("document_folder", Type(str, default="docs")),
         ("page_template", Type(str)),
     )
@@ -46,7 +46,7 @@ class TagPageBuilderPlugin(BasePlugin):
                 topic_name=topic_name, files=files, config=config
             )
 
-            self.generate_tags_file(topic_name=topic_files=, topic_files=files)
+            self.generate_tags_file(topic_name=topic_name, topic_files=topic_files)
 
     def get_topic_files(self, topic_name, files, config):
         info(f"Getting files under topic: {topic_name}")
@@ -71,7 +71,7 @@ class TagPageBuilderPlugin(BasePlugin):
             environment = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(str(template_path))
             )
-            template = environment.get_template("tags.md.template")
+            template = environment.get_template("page.md.template")
         else:
             environment = jinja2.Environment(
                 loader=jinja2.FileSystemLoader(
