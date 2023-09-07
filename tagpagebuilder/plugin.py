@@ -20,7 +20,7 @@ class TagPageBuilderPlugin(BasePlugin):
         self.page_template = None
 
     def on_config(self, config):
-        info("Assigning pluging configuraton options")
+        info("Assigning plugin configuraton options")
 
         self.topics = self.config.get("topics")
         self.document_folder = Path(
@@ -56,11 +56,12 @@ class TagPageBuilderPlugin(BasePlugin):
         for file in files:
             if not file.src_path.endswith(".md"):
                 continue
-            file_metadata = get_metadata(file.src_path, config["docs_dir"])
-            if "topic" in file_metadata:
-                if file_metadata["topic"] == topic_name:
-                    info(get_metadata(file.src_path, config["docs_dir"]))
-                    topic_files.append(get_metadata(file.src_path, config["docs_dir"]))
+            if file_metadata is not None:
+                file_metadata = get_metadata(file.src_path, config["docs_dir"])
+                if "topic" in file_metadata:
+                    if file_metadata["topic"] == topic_name:
+                        info(get_metadata(file.src_path, config["docs_dir"]))
+                        topic_files.append(get_metadata(file.src_path, config["docs_dir"]))
 
         return topic_files
 
