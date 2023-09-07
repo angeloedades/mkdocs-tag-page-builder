@@ -20,7 +20,7 @@ setup(
     license="MIT License",
     python_requires=">=3.10",
     install_requires=[
-        "mkdocs>=1.4",
+        "mkdocs>=1.3",
         "jinja2",
     ],
     classifiers=[
