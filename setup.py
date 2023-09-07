@@ -9,7 +9,7 @@ def read_file(fname):
 
 setup(
     name="mkdocs-tag-page-builder",
-    version="0.0.1",
+    version="0.0.2",
     description="An MkDocs plugin to a set of pages with tags",
     long_description=read_file("README.md"),
     long_description_content_type="text/markdown",

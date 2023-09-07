@@ -59,9 +59,15 @@ class TagPageBuilderPlugin(BasePlugin):
             file_metadata = get_metadata(file.src_path, config["docs_dir"])
             if file_metadata is not None:
                 if "topic" in file_metadata:
-                    if file_metadata["topic"] == topic_name:
-                        info(get_metadata(file.src_path, config["docs_dir"]))
-                        topic_files.append(get_metadata(file.src_path, config["docs_dir"]))
+                    if "," in file_metadata["topic"]:
+                        for single_topic in str(file_metadata["topic"]).split(","):
+                            if single_topic == topic_name:
+                                info(f"Adding {file.src_path} to {topic_name}")
+                                topic_files.append(get_metadata(file.src_path, config["docs_dir"]))
+                    else:
+                        if file_metadata["topic"] == topic_name:
+                            info(f"Adding {file.src_path} to {topic_name}")
+                            topic_files.append(get_metadata(file.src_path, config["docs_dir"]))
 
         return topic_files
 
