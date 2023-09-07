@@ -56,8 +56,8 @@ class TagPageBuilderPlugin(BasePlugin):
         for file in files:
             if not file.src_path.endswith(".md"):
                 continue
+            file_metadata = get_metadata(file.src_path, config["docs_dir"])
             if file_metadata is not None:
-                file_metadata = get_metadata(file.src_path, config["docs_dir"])
                 if "topic" in file_metadata:
                     if file_metadata["topic"] == topic_name:
                         info(get_metadata(file.src_path, config["docs_dir"]))
