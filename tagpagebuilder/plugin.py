@@ -103,5 +103,5 @@ class TagPageBuilderPlugin(BasePlugin):
 
         t = self.generate_topic_page(data=tag_dict, topic_name=topic_name)
 
-        with open(f"{self.tags_folder}/{topic_name}.md", "w") as f:
+        with open(f"{self.document_folder}/{topic_name}.md", "w") as f:
             f.write(t)

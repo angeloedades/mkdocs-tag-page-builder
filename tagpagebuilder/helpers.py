@@ -26,5 +26,5 @@ def get_metadata(name, path):
         if metadata:
             meta = yaml.load(metadata, Loader=yaml.FullLoader)
             meta.update(filename=name)
-            info(f"META: {meta}")
+            # info(f"META: {meta}")
             return meta
